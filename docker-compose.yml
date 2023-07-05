@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  swagger-ui:
+    build:
+      context: .  # Replace this with the path to your Dockerfile
+      dockerfile: Dockerfile
+    volumes:
+      - ./20-envsubst-on-templates.sh:/docker-entrypoint.d/20-envsubst-on-templates.sh
+    environment:
+      - TO_FILTER_VAR=123
+      - ABCD=abcd
+      - BASE_URL=/swagger
+      - SWAGGER_JSON_URL=<PLACEHOLDER>
+    ports:
+      - "8080:8080"
