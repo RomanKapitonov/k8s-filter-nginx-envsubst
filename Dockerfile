@@ -2,4 +2,5 @@
 FROM swaggerapi/swagger-ui:latest
 
 # Set an environment variable
-ENV NGINX_ENVSUBST_FILTER="^TO_FILTER.*"
+# ENV NGINX_ENVSUBST_FILTER="^TO_FILTER.*"
+ENV BOSI_OC=123

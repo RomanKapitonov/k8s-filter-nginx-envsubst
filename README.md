@@ -15,3 +15,7 @@ It could be done by changing `( name ~ /${filter}/ )` to `( name !~ /${filter}/ 
 ```sh
 defined_envs=$(printf '${%s} ' $(awk "END { for (name in ENVIRON) { print ( name !~ /${filter}/ ) ? name : \"\" } }" < /dev/null ))
 ```
+
+## Solution
+
+Add a .envsh script to unset the vars before the default configuration. Mount using k8s volume.

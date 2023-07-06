@@ -40,7 +40,7 @@ auto_envsubst() {
   local filter="${NGINX_ENVSUBST_FILTER:-}"
 
   local template defined_envs relative_path output_path subdir
-  defined_envs=$(printf '${%s} ' $(awk "END { for (name in ENVIRON) { print ( name !~ /${filter}/ ) ? name : \"\" } }" < /dev/null ))
+  defined_envs=$(printf '${%s} ' $(awk "END { for (name in ENVIRON) { print ( name ~ /${filter}/ ) ? name : \"\" } }" < /dev/null ))
   [ -d "$template_dir" ] || return 0
   if [ ! -w "$output_dir" ]; then
     entrypoint_log "$ME: ERROR: $template_dir exists, but $output_dir is not writable"
@@ -80,6 +80,10 @@ auto_envsubst() {
     done
   fi
 }
+
+echo -e "${RED}################################################${RESET}"
+echo -e "RUNNING 20-envsubst-on-templates.sh"
+echo -e "${RED}################################################${RESET}"
 
 auto_envsubst
 

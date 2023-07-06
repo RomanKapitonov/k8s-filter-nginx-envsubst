@@ -1,0 +1,9 @@
+#!/bin/sh
+
+prefix="BOSI_"
+
+env_vars=$(env | awk -F'=' -v prefix="$prefix" '$1 ~ "^" prefix { print $1 }')
+
+for var in $env_vars; do
+  unset "$var"
+done

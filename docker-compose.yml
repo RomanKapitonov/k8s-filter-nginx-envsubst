@@ -6,11 +6,12 @@ services:
       context: .  # Replace this with the path to your Dockerfile
       dockerfile: Dockerfile
     volumes:
+      - ./00-unset-bosi-env-vars.envsh:/docker-entrypoint.d/00-unset-bosi-env-vars.envsh
       - ./20-envsubst-on-templates.sh:/docker-entrypoint.d/20-envsubst-on-templates.sh
     environment:
-      - TO_FILTER_VAR=123
+      - BOSI_ANOTHER=123
       - ABCD=abcd
       - BASE_URL=/swagger
-      - SWAGGER_JSON_URL=<PLACEHOLDER>
+      - SWAGGER_JSON_URL=<placeholder>
     ports:
       - "8080:8080"
